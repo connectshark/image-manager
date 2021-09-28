@@ -6,6 +6,9 @@ const store = createStore({
   mutations: {
   },
   actions: {
+    init () {
+      
+    }
   }
 })
 
