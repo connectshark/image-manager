@@ -4,15 +4,15 @@
 </template>
 
 <script>
+import { useStore } from 'vuex'
 import Head from './components/head.vue'
 export default {
   components: {
     Head
   },
   setup () {
-    return {
-      title: 'Hello'
-    }
+    const store = useStore()
+    store.dispatch('init')
   }
 }
 </script>

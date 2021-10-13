@@ -2,9 +2,10 @@
 <div class="add">
   <div class="preview">
     <h3 class="img-title">{{title}}</h3>
-    <figure v-show="imgUrl">
-      <img @dragstart.prevent :src="imgUrl" :alt="title">
+    <figure v-if="imgUrl">
+      <img @dragstart.prevent :src="imgUrl" :alt="title" @error="errHandler">
     </figure>
+    <div class="empty" v-else></div>
     <ul class="tag-group">
       <li v-for="(tag, index) in tags" :key="index" class="tag-item"><i class='bx bx-purchase-tag'></i>{{tag.value}}</li>
     </ul>
@@ -19,7 +20,7 @@
   </div>
   <div class="row">
     <h3 class="row-title"><i class='bx bx-purchase-tag'></i>標記<span @click="addTag">+</span><span @click="removeTag">-</span></h3>
-    <input v-for="(tag, index) in tags" :key="index" type="text" v-model.trim.lazy="tag.value" placeholder="圖片標記" class="ip" maxlength="20">
+    <input v-for="(tag, index) in tags" :key="index" type="text" v-model.trim="tag.value" placeholder="圖片標記" class="ip" maxlength="20">
   </div>
   <div class="row">
     <Btn :callback="submit"/>
@@ -30,12 +31,14 @@
 <script>
 import Btn from '../components/btn.vue'
 import { ref } from 'vue'
+import { useStore } from 'vuex'
 export default {
   components: {
     Btn
   },
   setup () {
-    const imgUrl = ref('https://i.imgur.com/0Dtbf1s.png')
+    const store = useStore()
+    const imgUrl = ref('')
     const imgHtml = ref(null)
     const title = ref('')
     const titleHtml = ref(null)
@@ -75,7 +78,11 @@ export default {
         title: title.value,
         tags: [...tag]
       }
-      console.log(data)
+      store.commit('addItem', data)
+    }
+
+    const errHandler = () => {
+      imgUrl.value = ''
     }
     return {
       imgHtml,
@@ -85,7 +92,8 @@ export default {
       tags,
       addTag,
       removeTag,
-      submit
+      submit,
+      errHandler
     }
   }
 }
@@ -105,6 +113,7 @@ export default {
       font-size: 20px;
       line-height: 2;
       font-weight: bold;
+      min-height: 40px;
     }
     figure{
       img{
@@ -113,6 +122,13 @@ export default {
         width: 50%;
         vertical-align: middle;
       }
+    }
+    .empty{
+      width: 50%;
+      padding: 50% 0 0;
+      background-color: #ccc;
+      margin: auto;
+      border-radius: 20px;
     }
     .tag-group{
       .tag-item{
