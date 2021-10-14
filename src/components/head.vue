@@ -17,8 +17,8 @@ export default {
     return {
       navs: [
         {
-          url: '/',
-          name: '首頁'
+          url: '/view',
+          name: '瀏覽'
         },
         {
           url: '/add',

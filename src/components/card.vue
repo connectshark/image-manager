@@ -3,12 +3,13 @@
   <figure>
     <img :src="url" :alt="title">
   </figure>
-  <h4 class="title">{{title}}</h4>
+  <h4 class="title" @click="copy">{{title}}<i class='bx bx-copy-alt'></i></h4>
   <p class="tag-group"><span v-for="tag in tags" :key="tag" class="tag-item">{{tag}}</span></p>
 </li>
 </template>
 
 <script>
+import clipboard from 'copy-text-to-clipboard'
 export default {
   props: {
     title: {
@@ -21,9 +22,13 @@ export default {
       type: Array
     }
   },
-  setup () {
+  setup (props) {
+    const copy = () => {
+      clipboard(props.url)
+      alert('複製成功')
+    }
     return {
-
+      copy
     }
   }
 }
