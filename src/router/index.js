@@ -1,30 +1,13 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-
-const history = createWebHashHistory()
+import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
-  history,
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      redirect: {
-        name: 'home'
-      }
-    },
-    {
-      path: '/view',
       name: 'home',
-      component: () => import('../views/home.vue')
-    },
-    {
-      path: '/add',
-      name: 'add',
-      component: () => import('../views/add.vue')
-    },
-    {
-      path: '/:pathMatch(.*)*',
-      name: '404',
-      component: () => import('../views/404.vue')
+      component: HomeView
     }
   ]
 })

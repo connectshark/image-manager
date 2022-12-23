@@ -1,27 +1,13 @@
-<template>
-  <Head/>
-  <router-view></router-view>
-</template>
-
-<script>
-import { useStore } from 'vuex'
-import Head from './components/head.vue'
-export default {
-  components: {
-    Head
-  },
-  setup () {
-    const store = useStore()
-    store.dispatch('init')
-  }
-}
+<script setup>
 </script>
 
-
-<style lang="scss">
-#app {
-  font-family: 'Roboto Mono', 'Noto Sans TC', sans-serif;
-  text-align: center;
-  min-height: 100vh;
-}
-</style>
+<template>
+  <header class=" bg-stone-100">
+    <div class=" container mx-auto max-w-xl">
+      <h1 class=" leading-loose text-center py-10">
+        <router-link class=" text-2xl" to="/">Imgur Manager</router-link>
+      </h1>
+    </div>
+  </header>
+  <RouterView />
+</template>
