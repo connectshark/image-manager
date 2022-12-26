@@ -1,5 +1,6 @@
 import { onMounted, ref, unref } from 'vue'
-const DOMAIN = import.meta.env.VITE_API_DOMAIN
+const pre_fix = import.meta.env.PROD ? 'https://' : 'http://'
+const DOMAIN = pre_fix + import.meta.env.VITE_API_DOMAIN
 
 const useImage = () => {
   const loading = ref(false)

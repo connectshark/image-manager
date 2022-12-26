@@ -13,8 +13,5 @@ export default defineConfig({
   },
   server: {
     port: 8080
-  },
-  base: process.env.NODE_ENV === 'production'
-    ? '/image-manager/'
-    : '/'
+  }
 })
