@@ -1,9 +1,9 @@
 
 <template>
-  <main class=" container mx-auto max-w-xl py-6">
+  <main class="w-11/12 mx-auto max-w-xl py-6">
     <form @submit.prevent="upload(file)">
     <section class=" relative">
-      <label for="upload" class="flex items-center justify-center py-10 bg-stone-200 hover:opacity-80 cursor-pointer rounded">
+      <label for="upload" class="flex items-center justify-center py-10 bg-stone-200 hover:opacity-80 cursor-pointer rounded shadow">
         <span>上傳圖片區</span>
       </label>
       <input @change="fileHandler" accept="image/*" class=" absolute  top-0 left-0 -z-10 opacity-0" type="file" id="upload">
@@ -43,6 +43,9 @@ const {
   upload,
   loading,
   album,
-  deleteImage
+  deleteImage,
+  getImage
 } = useImage()
+
+getImage('82CJMWn')
 </script>

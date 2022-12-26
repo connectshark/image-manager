@@ -21,7 +21,7 @@ const useImage = () => {
       loading.value = false
       return
     }
-    const res = await fetch_response.json()
+    await fetch_response.json()
     await getAlbum()
     loading.value = false
   }
@@ -45,7 +45,17 @@ const useImage = () => {
   const getAlbum = async () => {
     const fetch_response = await fetch(DOMAIN + '/album')
     const res = await fetch_response.json()
-    album.value = res.data.images
+    album.value = res.images
+  }
+
+  const getGallery = async () => {
+    const fetch_response = await fetch(DOMAIN + '/gallery')
+    const res = await fetch_response.json()
+  }
+
+  const getImage = async (hash) => {
+    const fetch_response = await fetch(DOMAIN + `/image?hash=${hash}`)
+    const res = await fetch_response.json()
   }
 
   onMounted(getAlbum)
@@ -55,7 +65,9 @@ const useImage = () => {
     loading,
     error,
     album,
-    deleteImage
+    deleteImage,
+    getGallery,
+    getImage
   }
 }
 
